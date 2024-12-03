@@ -1,51 +1,69 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: astoll <astoll@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 12:33:56 by astoll            #+#    #+#             */
-/*   Updated: 2024/10/01 15:26:38 by astoll           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHILO_H
 # define PHILO_H
 
 # include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-typedef struct s_table
+typedef struct s_table	t_table;
+
+typedef enum s_state
 {
-	time_t			start_time;
-	time_t			time_to_die;
-	time_t			time_to_eat;
-	time_t			time_to_sleep;
-	unsigned int	must_eat_count;
-	unsigned int	nb_philos;
-	bool			sim_status;
-	pthread_mutex_t	sim_status_lock;
-	pthread_mutex_t	*fork_locks;
-	pthread_mutex_t	write_lock;
-	t_philo			**philos;
-}	t_table;
+	SLEEPING,
+	EATING,
+	TOOK_FORKS,
+	THINKING,
+	DEAD
+}						t_state;
 
 typedef struct s_philo
 {
-	pthread			thread;
-	unsigned int	id;
-	unsigned int	meals_eaten;
-	unsigned int	fork[2];
-	time_t			last_meal;
-	pthread_mutex_t	meal_time_lock;
-	t_table			*table;
-}	t_philo;
+	int					id;
+	int					meals;
+	t_table				*table;
+	pthread_t			thread;
+	pthread_mutex_t		lock_state;
+	t_state				state;
+	pthread_mutex_t		lock_fork;
+	bool				fork_available;
+	struct s_philo		*s_philo;
+	size_t				last_meal;
+}						t_philo;
 
+typedef struct s_table
+{
+	t_philo				*philo;
+	int					nb_philos;
+	int					nb_meals;
+	size_t				time_to_death;
+	size_t				time_to_eat;
+	size_t				time_to_sleep;
+	size_t				start_time;
+	bool				someone_died;
+	pthread_mutex_t		lock_write;
+}						t_table;
 
-
-
-
-
-
+int						ft_atoi(const char *str);
+void					start_threads(t_table *table);
+void					init_philos(t_table *table);
+void					init_tables(int argc, char **argv);
+bool					enough_meals(t_philo *philo);
+bool					is_someone_dead(t_table *table);
+void					die(t_philo *philo);
+void					*routine(void *param);
+bool					check_state(t_philo *philo, t_state state);
+void					change_state(t_philo *philo, t_state state);
+size_t					get_current_time(void);
+void					think(t_philo *philo);
+void					sleepy(t_philo *philo);
+void					eat(t_philo *philo);
+bool					take_both_forks(t_philo *philo);
+bool					take_own_fork(t_philo *philo);
+bool					take_sfork(t_philo *philo);
+bool					is_digit(const char *str);
+void					*ft_calloc(size_t nmemb, size_t size);
 
 #endif
