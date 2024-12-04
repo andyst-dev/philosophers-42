@@ -12,7 +12,6 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -pthread #-fsanitize=thread -g 
 
-
 all:			$(NAME)
 
 $(NAME): 		$(OBJS)
@@ -31,3 +30,5 @@ fclean: clean
 				rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
