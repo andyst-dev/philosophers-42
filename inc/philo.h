@@ -17,7 +17,7 @@ typedef enum s_state
 	TOOK_FORKS,
 	THINKING,
 	DEAD
-}						t_state;
+}	t_state;
 
 typedef struct s_philo
 {
@@ -32,7 +32,7 @@ typedef struct s_philo
 	t_table				*table;
 	struct s_philo		*s_philo;
 
-}						t_philo;
+}	t_philo;
 
 typedef struct s_table
 {
@@ -45,7 +45,7 @@ typedef struct s_table
 	size_t				time_to_sleep;
 	bool				someone_died;
 	pthread_mutex_t		print_lock;
-}						t_table;
+}	t_table;
 
 // main
 bool	parsing(int argc, char **argv);
