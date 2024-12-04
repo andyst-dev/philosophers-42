@@ -4,13 +4,13 @@ SRC_DIR = src
 INC_DIR = inc
 OBJ_DIR = obj
 
-SRC_FILES = main.c init.c simulation.c routine.c \
-			actions.c utils.c
+SRC_FILES = main.c init.c routine.c forks.c \
+			state.c utils.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -fsanitize=thread -g -pthread
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -pthread #-fsanitize=thread -g 
 
 
 all:			$(NAME)
