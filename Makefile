@@ -10,7 +10,7 @@ SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -pthread #-fsanitize=thread -g 
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -pthread #-fsanitize=thread -g
 
 all:			$(NAME)
 
