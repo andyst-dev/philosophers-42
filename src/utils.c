@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astoll <astoll@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 09:33:19 by astoll            #+#    #+#             */
+/*   Updated: 2024/12/19 09:46:47 by astoll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(const char *str)
@@ -26,25 +38,27 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*str;
-	unsigned int	i;
+	size_t			i;
+	size_t			total;
+	void			*ptr;
+	unsigned char	*temp;
 
-	if (nmemb > 65535 && size > 65535)
-		return (NULL);
-	if (nmemb * size > 2147483647)
-		return (NULL);
-	str = malloc(size * nmemb);
 	i = 0;
-	if (!str)
+	if (size != 0 && count > SIZE_MAX / size)
 		return (NULL);
-	while (i < nmemb * size)
+	total = count * size;
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	temp = (unsigned char *)ptr;
+	while (i < total)
 	{
-		str[i] = 0;
+		temp[i] = 0;
 		i++;
 	}
-	return ((void *)str);
+	return (ptr);
 }
 
 bool	is_digit(char *str)

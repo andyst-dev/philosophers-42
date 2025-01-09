@@ -9,8 +9,8 @@ SRC_FILES = main.c init.c routine.c forks.c \
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -pthread #-fsanitize=thread -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) #-pthread -fsanitize=address -g -fsanitize=leak
 
 all:			$(NAME)
 
