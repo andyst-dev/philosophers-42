@@ -1,31 +1,31 @@
 # philosophers
 
 A concurrent programming project developed as part of the 42 curriculum.
-This project consists of simulating the dining philosophers problem using threads and mutexes, with careful handling of timing, shared resources, and synchronization constraints.
+`philosophers` is a simulation of the dining philosophers problem built with threads and mutexes.
 
-`philosophers` was designed to strengthen core C skills around multithreading, mutex-based synchronization, timing control, and race-condition prevention.
+It was a good way to build solid foundations in multithreading, synchronization, timing control and race-condition prevention in C.
 
 ## Features
 - Philosopher simulation with one thread per philosopher
 - Fork access protected with mutexes
-- State transitions for thinking, eating, sleeping, and death
+- State transitions for thinking, eating, sleeping and death
 - Command-line configuration for timing and meal limits
 
 ## Project structure
-- `inc/philo.h` — main header file, structures, enums, and function prototypes
+- `inc/philo.h` — main header file, structures, enums and function prototypes
 - `src/main.c` — argument validation and program entry point
-- `src/init.c` — table setup, philosopher initialization, and thread startup
+- `src/init.c` — table setup, philosopher initialization and thread startup
 - `src/routine.c` — philosopher routine and state progression
 - `src/forks.c` — fork acquisition logic
 - `src/state.c` — state checks and updates
-- `src/utils.c` — utility helpers for parsing, allocation, and timing
+- `src/utils.c` — utility helpers for parsing, allocation and timing
 - `Makefile` — builds the `philo` executable
 
 ## Mandatory part
-The mandatory part implements the dining philosophers simulation with threads and mutexes.
+The mandatory part focuses on the synchronization logic required to run the dining philosophers simulation correctly.
 
 ### Program
-- `philo` — runs the simulation with the required timing arguments and optional meal limit
+- `philo` — runs the simulation with the required timing arguments and an optional meal limit
 
 ### Core behavior
 - creates one thread per philosopher
@@ -38,9 +38,9 @@ The mandatory part implements the dining philosophers simulation with threads an
 ### What happens at runtime
 - the program parses the command-line arguments and initializes the table state
 - each philosopher is created as a separate thread
-- philosophers repeatedly try to take two forks, eat, sleep, and think
+- philosophers repeatedly try to take two forks, eat, sleep and think
 - each action is printed with a timestamp and philosopher id
-- the simulation ends as soon as one philosopher dies, or when the optional meal target is reached for every philosopher
+- the simulation ends as soon as one philosopher dies or when the optional meal target is reached for every philosopher
 
 ### Subject requirements to respect
 - no global variables are allowed
@@ -75,13 +75,6 @@ Rebuild everything:
 make re
 ```
 
-## Output
-The project builds one executable:
-
-```bash
-philo
-```
-
 ## Usage
 Run the program with the required timing arguments:
 
@@ -96,7 +89,7 @@ Example:
 ```
 
 ## Learning outcomes
-This project was an introduction to concurrent programming in C.
+This project was my first real introduction to concurrent programming in C.
 It helped build solid foundations in:
 - POSIX threads
 - mutex-based synchronization
